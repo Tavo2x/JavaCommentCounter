@@ -1,6 +1,6 @@
 public class CommentCounter {
 //- Variables
-//--Does a newLine count towards any?
+
     private int codeNum = 0;
     private int singleLineNum = 0;
     private int multieCommentNum = 0;
@@ -18,13 +18,14 @@ public class CommentCounter {
         comment = new StringBuilder();
         javaDoc = new StringBuilder();
         original = new StringBuilder();
+        currentState = new CodeState();
     }
-//- 
+//- Updates current state
     public void setState(State st){
         currentState = st;
     }
 //- Handles char by char
-//- Possible state's it might come across
+//- Possible char's it might come across
     public void processChar(char c){
         switch (c) {
             case '/':
@@ -61,7 +62,7 @@ public class CommentCounter {
 //-
     public void recordSingleLineComment(char c){
         singleLineNum = singleLineNum + 1;
-        code.append('.'); // When vierwing tab it'll read as '.'
+        code.append('.'); // When vierwing the code tab it'll show as '.'
         comment.append(c); // When viewing tab we will see the comment
         javaDoc.append('.'); // When viewing tab it'll read as '.'
         original.append(c); // Keeps the original
@@ -84,9 +85,9 @@ public class CommentCounter {
     }
 //-
     public  void recordNewLine(){
-        code.append('\n'); // 
+        code.append('\n'); // Keeps the new line in the code tab
         comment.append('\n'); // When having a new line in a comment it should reflect that
-        javaDoc.append('\n'); // (ABOVE)
+        javaDoc.append('\n'); // Keeping the new line in the javaDoc tab
         original.append('\n'); // Keeps the original
     }
 //- Returns the code number
