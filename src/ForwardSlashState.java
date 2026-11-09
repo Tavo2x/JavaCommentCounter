@@ -5,7 +5,6 @@ public class ForwardSlashState implements State{
 //- Then switches to the SingleLineCommentState
     @Override
     public void forwardSlash(CommentCounter c) {
-
         c.recordSingleLineComment('/');
         c.recordSingleLineComment('/');
         c.setState(new SingleLineCommentState());
